@@ -18,8 +18,16 @@ defmodule RumblWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/user", UserController, :index
-    get "/user/:id", UserController, :show
+
+    # Creates routes as follows:
+    # :index makes /users -> get
+    # :show makes /users/:id -> get
+    # :new makes /users/new -> get
+    # :create makes /users -> post
+    resources "/users", UserController, only: [:index, :new, :show, :create]
+
+    # get "/users", UserController, :index
+    # get "/user/:id", UserController, :show
   end
 
   # Other scopes may use custom stacks.
