@@ -1,9 +1,17 @@
-<h1>All Users:</h1>
+<%= case (length(@users)) do %>
+  <% n when n > 0 -> %>
+  <h2>Registered Users:</h2>
+
+  <% 0 -> %>
+  <h2>No Users Found</h2>
+<% end %>
+
 
 <table>
   <%= for user <- @users do %>
     <tr>
-      <td><%= render "user.html", user: user %></td>
+      <td><%= render("user.html", user: user) %></td>
+      
       <td><%= link("View", to: Routes.user_path(@conn, :show, user.id)) %></td>
     </tr>
   <% end %>
